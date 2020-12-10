@@ -1,0 +1,82 @@
+$color-palette: (
+  white: (
+    base: #ffffff,
+    light: #f6f6f6,
+  ),
+  black: (
+    base: #000000,
+    light: #393939,
+  ),
+  grey: (
+    base: #625f66,
+    lighter: #dadada,
+    lightest: #e5e5e5,
+    bg: #f9f9f9,
+    border: #cccccc,
+    disabled-border: #dadada,
+    disabled-text: #9d9d9d,
+    progressbar-bg: #e5e5e5,
+    slider-bg: #b3b3b3,
+    card-border: #e5e5e5,
+  ),
+  destructive: (
+    base: #f52536,
+  ),
+  red: (
+    base: #f52536,
+  ),
+  bg: (
+    base: #f9f9f9,
+    white: #fff,
+    black: #000,
+  ),
+  ui: (
+    green: #4ae959,
+    yellow: #ffe034,
+    red: #f52536,
+  ),
+);
+
+$accent-palette: (
+  mainAccentColor: #7b00ff,
+  activeRadioInnerColor: #fff,
+  alert: #f52536,
+  success: #4ae959,
+  switchActiveFrontColor: #fff,
+  inputBorder: #ccc,
+  modalDropShadow: rgba(0, 0, 0, 0.22),
+);
+
+// Returns the color value for a given color name and group.
+// @param {String} $hue - The color's hue.
+// @param {String} $value - The darkness/lightness of the color. Defaults to base.
+// @param {Boolean} $invert - If the color should invert with dark theme
+// appear. Applies a multiply filter to ensure appropriate contrast.
+// @return {Color} The color value.
+@function color($hue, $value: base, $invert: true) {
+  $color: map-get(map-get($color-palette, $hue), $value);
+
+  @if map-has-key($color-palette, $color) {
+    $color: map-get(map-get($color-palette, $color), $value);
+  }
+
+  @if type-of($color) == color {
+    @return $color;
+  } @else {
+    @error 'Color `#{$hue} - #{$value}` not found. Available colors: #{available-names($color-palette)}';
+  }
+}
+
+@function accent($value) {
+  $accent: map-get($accent-palette, $value);
+
+  @if map-has-key($accent-palette, $accent) {
+    $accent: map-get($accent-palette, $accent);
+  }
+
+  @if type-of($accent) == color {
+    @return $accent;
+  } @else {
+    @error 'Accent Color `#{$value}` not found. Available accent colors: #{available-names($accent-palette)}';
+  }
+}
