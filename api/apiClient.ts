@@ -1,8 +1,8 @@
 import axios, { AxiosRequestConfig, AxiosInstance, AxiosResponse } from 'axios';
 
 // insert your UpCloud username & password here!
-const UPCLOUD_USERNAME = 'taskuser';
-const UPCLOUD_PASSWORD = 'Task_Secret1';
+const UPCLOUD_USERNAME = '*******';
+const UPCLOUD_PASSWORD = '********';
 
 // use CORS proxy, so we don't get CORS errors such as "No 'Access-Control-Allow-Origin' header is present"
 const API_URL =
